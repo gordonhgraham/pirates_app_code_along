@@ -3,8 +3,9 @@
   angular
     .module('piratesApp')
     .controller('PiratesController', PiratesController)
-    .controller('ShowPirateController', ShowPirateController)
     .controller('NewPirateController', NewPirateController)
+    .controller('ShowPirateController', ShowPirateController)
+    // .controller('EditPirateController', EditPirateController)
 
     function PiratesController(pirates) {
       var vm = this;
@@ -13,12 +14,12 @@
 
     function NewPirateController(PirateService, $location) {
       var vm = this;
-      vm.pirate = {}
+      vm.pirate = {};
 
-      vm.addPirate = function (newPirate){
-        PirateService.createPirate(newPirate).then(function(res){
-          $location.path('/pirates')
-        })
+      vm.addPirate = function(newPirate) {
+        PirateService.createPirate(newPirate).then(function(res) {
+          $location.path('/pirates');
+        });
       }
     }
 
@@ -32,8 +33,21 @@
       }
     }
 
+    // function EditPirateController(PirateService, pirate, $location) {
+    //   var vm = this;
+    //   vm.pirate = pirate.data;
+    //   if (!vm.pirate) $location.path('/pirates');
+    //
+    //   vm.editPirate = function(updatedPirate) {
+    //     PirateService.updatePirate(updatedPirate).then(function(res) {
+    //       $location.path('/pirates');
+    //     });
+    //   }
+    // }
+
     PiratesController.$inject = ['pirates'];
+    NewPirateController.$inject = ['PirateService', '$location'];
     ShowPirateController.$inject = ['PirateService', '$route'];
-    ShowPirateController.$inject = ['PirateService', '$location'];
+    // EditPirateController.$inject = ['PirateService', 'pirate', '$location'];
 
 })()

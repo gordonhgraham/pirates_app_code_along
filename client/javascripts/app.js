@@ -17,8 +17,16 @@
       .when('/pirates/new', {
         templateUrl: '../views/pirates/new.html',
         controller: 'NewPirateController',
-        controllerAs: 'vm',
+        controllerAs: 'vm'
       })
+      // .when('/pirates/:id/edit', {
+      //   templateUrl: '../views/pirates/edit.html',
+      //   controller: 'EditPirateController',
+      //   controllerAs: 'vm',
+      //   resolve: {
+      //     pirate: getPirateById
+      //   }
+      // })
       .otherwise({redirectTo: '/pirates'})
     $locationProvider.html5Mode(true);
   }
@@ -27,7 +35,12 @@
     return PirateService.getPirates();
   }
 
+  // function getPirateById(PirateService, $route) {
+  //   return PirateService.getPirate($route.current.params.id);
+  // }
+
   config.$inject = ['$routeProvider', '$locationProvider'];
   getAllPirates.$inject = ['PirateService'];
+  // getPirateById.$inject = ['PirateService', '$route'];
 
 })()
